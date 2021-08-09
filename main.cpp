@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QtWidgets>
 #include "raceclock.h"
+#include "counterclock.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,11 +18,12 @@ int main(int argc, char *argv[])
 
     QWidget window;
     RaceClock clock;
+    CounterClock CounterClock;
 
     QHBoxLayout *layout = new QHBoxLayout(&window);
     QLineEdit *lineEdit = new QLineEdit();
     layout->addWidget(&clock);
-    layout->addWidget(lineEdit);
+    layout->addWidget(&CounterClock);
     window.setLayout(layout);
 
     window.show();
