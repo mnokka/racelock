@@ -17,7 +17,7 @@ RaceClock::RaceClock(QWidget *parent)
 
     showTime();
 
-    setWindowTitle(tr("Digital Clock"));
+//    setWindowTitle(tr("Digital Clock"));
     resize(250, 150);
 }
 
