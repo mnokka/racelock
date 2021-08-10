@@ -12,12 +12,14 @@ SOURCES += \
     counterclock.cpp \
     main.cpp \
     mainwindow.cpp \
-    raceclock.cpp
+    raceclock.cpp \
+    trafficlights.cpp
 
 HEADERS += \
     counterclock.h \
     mainwindow.h \
-    raceclock.h
+    raceclock.h \
+    trafficlights.h
 
 FORMS += \
     mainwindow.ui

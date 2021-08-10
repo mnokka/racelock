@@ -6,6 +6,7 @@
 #include <QtWidgets>
 #include "raceclock.h"
 #include "counterclock.h"
+#include "trafficlights.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,11 +20,14 @@ int main(int argc, char *argv[])
     QWidget window;
     RaceClock clock;
     CounterClock CounterClock;
+    TrafficLights TrafficLights;
 
-    QHBoxLayout *layout = new QHBoxLayout(&window);
-    QLineEdit *lineEdit = new QLineEdit();
+    QVBoxLayout *layout = new QVBoxLayout(&window);
+    //QLineEdit *lineEdit = new QLineEdit();
     layout->addWidget(&clock);
     layout->addWidget(&CounterClock);
+    layout->addWidget(&TrafficLights);
+
     window.setLayout(layout);
 
     window.show();
