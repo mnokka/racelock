@@ -32,7 +32,7 @@ void CounterClock::showTime()
     //QTime time = QTime::currentTime();
    // qDebug() << "time:" << time;
     //QString text = time.toString("hh:mm:ss");
-    qDebug() << "counter:" << counter;
+    //qDebug() << "counter:" << counter;
     //if ((time.second() % 2) == 0)
     //    text[2] = ' ';
     display(counter);
