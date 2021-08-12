@@ -1,3 +1,8 @@
+// Racelock inspired by Algae timing equipmwnt
+// by mika.nokka1@gmail.com
+//
+
+
 
 #include <QApplication>
 #include <QPushButton>
@@ -7,6 +12,7 @@
 #include "raceclock.h"
 #include "counterclock.h"
 #include "trafficlights.h"
+#include "parameters.h"
 
 
 
@@ -40,7 +46,10 @@ int main(int argc, char *argv[])
     mainLayout->addLayout(layout2);
 
     window.setLayout(mainLayout);
-    window.setWindowTitle("Raceclock POC by MPN2021");
+    int steptime=STEPTIME;
+    QString title;
+    QTextStream(&title) << "Raceclock   ** SENDING INTERVAL:"  << steptime <<" SECONDS **";
+    window.setWindowTitle(title);
     window.show();
 
 
