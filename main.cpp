@@ -37,8 +37,9 @@ int main(int argc, char *argv[])
     mainLayout->addLayout(layout2);
 
     window.setLayout(mainLayout);
-
+    window.setWindowTitle("Raceclock POC by MPN2021");
     window.show();
+
 
 
     clock.show();
