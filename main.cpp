@@ -8,6 +8,9 @@
 #include "counterclock.h"
 #include "trafficlights.h"
 
+
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

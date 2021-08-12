@@ -4,6 +4,7 @@
 
 #include "counterclock.h"
 #include <QDebug>
+#include "parameters.h"
 
 CounterClock::CounterClock(QWidget *parent)
     : QLCDNumber(parent)
@@ -27,7 +28,8 @@ void CounterClock::showTime()
 {
     display(counter);
     counter=counter+1;
-    if (counter>=31) {
+
+    if (counter>=steptime+1) {
         counter=0;
     }
 }

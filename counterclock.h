@@ -3,6 +3,7 @@
 
 
 #include <QLCDNumber>
+#include "parameters.h"
 
 class CounterClock : public QLCDNumber
 {
@@ -11,6 +12,8 @@ class CounterClock : public QLCDNumber
 public:
     CounterClock(QWidget *parent = 0);
     int counter=0;
+    int steptime=STEPTIME;
+
 
 private slots:
     void showTime();

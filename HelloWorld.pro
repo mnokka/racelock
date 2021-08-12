@@ -18,6 +18,7 @@ SOURCES += \
 HEADERS += \
     counterclock.h \
     mainwindow.h \
+    parameters.h \
     raceclock.h \
     trafficlights.h
 

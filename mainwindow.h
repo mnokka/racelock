@@ -14,6 +14,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    //int steptime=30;
+    //int GetStepTime(void);
 
 private:
     Ui::MainWindow *ui;

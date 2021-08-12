@@ -2,6 +2,7 @@
 #include <QtWidgets>
 #include <QSizePolicy>
 #include <QResizeEvent>
+#include "parameters.h"
 
 #include "trafficlights.h"
 #include <QDebug>
@@ -49,20 +50,22 @@ void TrafficLights::showTime()
     //display(text);
    //display("11:22:33:88");
     counter=counter+1;
-    if (counter>=31) {
+
+    qDebug() << "steptime" << steptime;
+    if (counter>=steptime+1) {
         counter=0;
         LightsButton->setStyleSheet("background-color:green;");
         LightsButton->setText("     GO     ");
         stateflag=1;
     }
-    if (counter>=2 and counter <20 and stateflag==1) {
+    if (counter>=2 and counter <steptime-10 and stateflag==1) {
 
         LightsButton->setStyleSheet("background-color:red;");
         LightsButton->setText("     WAIT    ");
         stateflag=2;
     }
 
-    if (counter>20 and counter <31 and stateflag==2) {
+    if (counter>steptime-10 and counter <steptime+1 and stateflag==2) {
 
         LightsButton->setStyleSheet("background-color:yellow;");
         LightsButton->setText("     READY     ");

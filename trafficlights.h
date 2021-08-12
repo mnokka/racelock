@@ -4,6 +4,7 @@
 
 #include <QLCDNumber>
 #include <QDialog>
+#include "parameters.h"
 
 class TrafficLights : public QDialog
 {
@@ -13,10 +14,13 @@ public:
     TrafficLights(QWidget *parent = 0);
     int counter=0;
     QPushButton *LightsButton;
+    int steptime=STEPTIME;
+
 
 private slots:
     void showTime();
     void resizeEvent(QResizeEvent*);
+
 
 };
 #endif // TRAFFICLIGHTS_H
