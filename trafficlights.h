@@ -16,6 +16,7 @@ public:
 
 private slots:
     void showTime();
+    void resizeEvent(QResizeEvent*);
 
 };
 #endif // TRAFFICLIGHTS_H

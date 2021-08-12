@@ -23,20 +23,9 @@ CounterClock::CounterClock(QWidget *parent)
 
 
 
-
-
-
-
 void CounterClock::showTime()
 {
-    //QTime time = QTime::currentTime();
-   // qDebug() << "time:" << time;
-    //QString text = time.toString("hh:mm:ss");
-    //qDebug() << "counter:" << counter;
-    //if ((time.second() % 2) == 0)
-    //    text[2] = ' ';
     display(counter);
-   //display("11:22:33:88");
     counter=counter+1;
     if (counter>=31) {
         counter=0;

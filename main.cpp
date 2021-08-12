@@ -22,13 +22,21 @@ int main(int argc, char *argv[])
     CounterClock CounterClock;
     TrafficLights TrafficLights;
 
-    QVBoxLayout *layout = new QVBoxLayout(&window);
+    QVBoxLayout *layout = new QVBoxLayout();
     //QLineEdit *lineEdit = new QLineEdit();
+    //layout->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     layout->addWidget(&clock);
     layout->addWidget(&CounterClock);
-    layout->addWidget(&TrafficLights);
+    QHBoxLayout *layout2 = new QHBoxLayout();
+    layout2->addWidget(&TrafficLights);
+    //layout2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    window.setLayout(layout);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(&window);
+    mainLayout->addLayout(layout);
+    mainLayout->addLayout(layout2);
+
+    window.setLayout(mainLayout);
 
     window.show();
 
