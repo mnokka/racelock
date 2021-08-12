@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     window.setLayout(mainLayout);
     int steptime=STEPTIME;
     QString title;
-    QTextStream(&title) << "Raceclock   ** SENDING INTERVAL:"  << steptime <<" SECONDS **";
+    QTextStream(&title) << "Raceclock by MNokka2021       ** SENDING INTERVAL:"  << steptime <<" SECONDS **";
     window.setWindowTitle(title);
     window.show();
 
