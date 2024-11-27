@@ -1,7 +1,9 @@
 Qt POC for running(etv) races racelock replacement (like in https://raceclock.com/)
 
 This clock give possibility ro have rolling starting for competitors
--user adds BIB m and send delay between competitors starts
+
+-user adds BIB number and sent delay between competitors 
+
 -log file have all data for parsing start times for result calculations (time, BIB)
 
 Example of log file:
