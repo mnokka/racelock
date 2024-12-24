@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     counterclock.cpp \
+    editwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     raceclock.cpp \
@@ -17,13 +18,13 @@ SOURCES += \
 
 HEADERS += \
     counterclock.h \
+    editwindow.h \
     mainwindow.h \
     parameters.h \
     raceclock.h \
     trafficlights.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
