@@ -34,90 +34,13 @@ void MainWindow::SetLog(void) {
     filename="RACE_CLOCK_"+datestring+"_"+timetext+".log";
     qDebug() << "filename:" << filename;
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
-#include <QMainWindow>
-#include <QFile>
-#include <QTextStream>
-#include <QDebug>
-#include <QTime>
-#include <QDate>
-#include <QPushButton>
-#include <QMenuBar>
-#include <QMessageBox>
-#include <QInputDialog>
-#include <QString>
-#include <QFileDialog>
-
-
-    class MainWindow : public QMainWindow
-    {
-
-    public:
-        MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
-        //int steptime=30;
-        //int GetStepTime(void);
-        void SetLog(void);
-        void createActions(void);
-        void createMenus(void);
-        void setBibNumber(const QString &newBibNumber);
-    private:
-        QFile *fileptr;
-        QString filename;
-
-        QMenu *helpMenu;
-        QAction *aboutAct;
-
-        QMenu *SettingsMenu;
-        QAction *aboutSet;
-
-        QMenu *BibMenu;
-        QAction *aboutBib;
-
-
-        QMenu *LogMenu;
-        QAction *aboutLog;
-
-        QString version="1.0";
-
-
-        //const int STEPTIME=30;
-        int steptime=15;
-        int ClockStepTime=steptime;
-        QString BibNumber="none";
-
-        QMainWindow *memeptr=nullptr;
-
-    private slots:
-        void about();
-        void settings();
-        void bib();
-        void log();
-        void logger(QString message);
-
-    signals:
-        void GotLogMessage(QString);
-        void BibChanged(QString);
-        void SettingsChanged(QString);
-        void RedoTitle(QString);
-
-    };
-#endif // MAINWINDOW_H
-
     QFile file(filename);
 
     fileptr=&file;
 
     if (fileptr->open(QIODevice::ReadWrite)) {
 
-        // qDebug() << "fileptr:" << fileptr;
-        // qDebug() << "file:" << &file;
-        // qDebug() << "*fileptr:" << *fileptr;
-
         QTextStream mystream(fileptr);
-        //mystream << "something" << endl;
         QString message;
         message="Created initial log file: " + filename;
         qDebug() << "message:" << message;
@@ -127,7 +50,7 @@ void MainWindow::SetLog(void) {
         message="Send delay:" + steptime+ "  Bib:"+BibNumber;
         emit GotLogMessage(message);
     } else
-        qDebug() << "Debug file open error";
+        qDebug() << "ERROR: Debug file open error";
 
 }
 
@@ -174,11 +97,6 @@ void MainWindow::createMenus()
 void MainWindow::about()
 {
 
-    /*    QMessageBox::about(this, tr("About the author and application <br>"
-            "Software replacment for hardware based race clocks<br>"
-               "(c) Mika Nokka 2021. <br> Development version, not licenced version: ",tr(version));
-*/
-
     QMessageBox msgBox;
     msgBox.setWindowTitle("About the author and application");
     msgBox.setText("Software replacment for hardware based race clock");
@@ -190,12 +108,6 @@ void MainWindow::about()
 
 void MainWindow::settings()
 {
-    //QMessageBox msgBox;
-    //msgBox.setWindowTitle("Settings window");
-    //msgBox.setText("TBD settings settings");
-    //msgBox.setInformativeText("TBD settings setting");
-    //msgBox.setStandardButtons(QMessageBox::Ok);
-    //int ret = msgBox.exec();
 
     bool ok;
     int i = QInputDialog::getInt(this, tr("Set delay between starters"),
@@ -219,39 +131,11 @@ void MainWindow::settings()
 }
 
 void MainWindow::bib() {
-    // QMessageBox msgBox;myBibNumber
-    // msgBox.setWindowTitle("Settings window");
-    // msgBox.setText("TBD settings settings");
-    // msgBox.setInformativeText("TBD settings setting");
-    // msgBox.setStandardButtons(QMessageBox::Ok);
-    // int ret = msgBox.exec();
 
-
-    /* bool ok;
-     QString text = QInputDialog::getText(this, tr("BIB"),
-                                          tr("Next Bib number:"), QLineEdit::Normal,
-                                          "", &ok);
-     if (ok && !text.isEmpty()) {
-         BibNumber = text;
-         QString title;
-           QTextStream(&title) << "Send delay: "  << ClockStepTime <<" secs     Next BIB:" << BibNumber ;
-          setWindowTitle(title);
-         qDebug() << "text:" << BibNumber;
-     }
-     */
-
-    //meptr = this; // class variable
-    //memeptr=this; //extern
-    //qDebug() << "main read memeptr:" << memeptr;
-    EditWindow *editWindow = new EditWindow;
-    editWindow->SetParentWindow(this); // now used in crfeation, thus not avaialble there
-    //qDebug() << "main: SetParentWindow:" << this;
-
-    editWindow->show();
-
-
-
-
+     EditWindow *editWindow = new EditWindow(this);
+      editWindow->SetParentWindow(this); // now used in crfeation, thus not avaialble there
+      setEditWindow(editWindow);
+      editWindow->show();
 }
 
 void MainWindow::log() {
@@ -296,15 +180,13 @@ void MainWindow::log() {
 }
 
 //slot
-void MainWindow::RedoTitle(QString myBibnumber) {
+void MainWindow::RedoTitle(const QString &newBibNumber)
+{
+    BibNumber = newBibNumber;
     QString title;
-    QTextStream(&title) << "Send delay: "  << ClockStepTime <<" secs     Next BIB:" << myBibnumber ;
+    QTextStream(&title) << "Next BIB: " << BibNumber;
     setWindowTitle(title);
-    QString message;
-    message="Bib number: " + myBibnumber +" added";
-    qDebug() << message;
-    emit BibChanged(message);
-    //qDebug() << "newbibnumber in title:" << myBibnumber;
+    qDebug() << "Window title updated to:" << title;
 }
 
 
@@ -331,3 +213,20 @@ void MainWindow::logger(QString message) {
 void MainWindow::setBibNumber(const QString &newBibNumber) {
     BibNumber = newBibNumber;
 }
+
+
+void MainWindow::setEditWindow(EditWindow *ptr)
+{
+    editWindowPtr = ptr;
+}
+
+EditWindow* MainWindow::getEditWindow() const
+{
+    return editWindowPtr;
+}
+
+MainWindow* MainWindow::GetMainWindow() const
+{
+    return memeptr;
+}
+

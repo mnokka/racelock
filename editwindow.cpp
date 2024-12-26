@@ -9,25 +9,20 @@
 #include "mainwindow.h"
 
 EditWindow::EditWindow(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), parentptr(nullptr)
 {
     echoLineEdit = new QLineEdit;
 
     QGridLayout *echoLayout = new QGridLayout;
     echoLayout->addWidget(echoLineEdit, 1, 0, 1, 2);
     setLayout(echoLayout);
-
     setWindowTitle(tr("Next Bib number"));
 
+    resize(400, 120);
 
-    connect(echoLineEdit, SIGNAL(returnPressed()),
-            this, SLOT(returnPressing()));
-
-    qDebug() << "editwindow read memeptr:" << parentptr;
-
-    connect(this, SIGNAL(GotBibNumber(QString)),
-            parentptr, SLOT(RedoTitle(QString)));
-
+    EditLinePtr=this;
+    echoLineEdit->setFocus();
+    connect(echoLineEdit, &QLineEdit::returnPressed, this, &EditWindow::returnPressing);
 }
 
 
@@ -39,13 +34,15 @@ void EditWindow::returnPressing()
     bibline=echoLineEdit->text();
     qDebug() << "bibline:" << bibline;
 
-    if (parentptr) { // Varmista, että MainWindow-osoitin on asetettu
-        parentptr->setBibNumber(bibline); // Päivitä MainWindow:n BibNumber
+    if (parentptr) {
+        parentptr->setBibNumber(bibline);
+        emit GotBibNumber(bibline);
+    } else {
+        qDebug() << "ERROR: Parent pointer not set!";
     }
 
-    //BibNumber = bibline; // extern
     echoLineEdit->clear();
-    emit GotBibNumber(bibline);
+    close(); // Sulje ikkuna syötön jälkeen
 }
 
 
@@ -54,4 +51,9 @@ void EditWindow::SetParentWindow(MainWindow *ptr) {
     parentptr = ptr;
     qDebug() << "set parentptr as:" << ptr;
     qDebug() << "read parentptr back:" << parentptr;
+
+    if (parentptr) {
+        connect(this, &EditWindow::GotBibNumber, parentptr, &MainWindow::RedoTitle);
+    }
 }
+

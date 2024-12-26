@@ -2,13 +2,16 @@
 #include <QtWidgets>
 #include <QSizePolicy>
 #include <QResizeEvent>
+#include "editwindow.h"
 #include "parameters.h"
 
 #include "trafficlights.h"
 #include <QDebug>
+#include "mainwindow.h"
 
 TrafficLights::TrafficLights(QWidget *parent)
     : QDialog(parent)
+
 {
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &TrafficLights::showTime);
@@ -17,20 +20,12 @@ TrafficLights::TrafficLights(QWidget *parent)
     LightsButton = new QPushButton("     xxxxx   ",this);
     LightsButton->setDefault(true);
     LightsButton->setStyleSheet("background-color:red;");
-    //LightsButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //LightsButton->setHorizontalStretch(2);
     LightsButton->setText("     WAIT     ");
-
-    //LightsButton->setStyleSheet("text-align:middle;");
-   //LightsButton->setMaximumSize(100);
-
-    //const QSize BUTTON_SIZE = QSize(100, 100);
-    //LightsButton->resize(BUTTON_SIZE);
     showTime();
 }
 
 
-void TrafficLights::resizeEvent(QResizeEvent*)
+void TrafficLights::resizeEvent(QResizeEvent* event)
 
 {
  qDebug() << "trafficlights resize event";
@@ -38,17 +33,24 @@ void TrafficLights::resizeEvent(QResizeEvent*)
  qDebug() << "size:" << size ;
  const QSize BUTTON_SIZE = QSize(100, 100);
  LightsButton->resize(size);
+
+ EditWindow *editWindow = mainWindowPtr->getEditWindow();
+
+ if (editWindow) {
+      qDebug() << "editwindow eesizing";
+     int newWidth = size.width() * 0.5;
+     int newHeight = size.height() * 0.3;
+     editWindow->resize(newWidth, newHeight); // Muuta kokoa
+ }
+
+QWidget::resizeEvent(event); // Ku
+
 }
 
 void TrafficLights::showTime()
 {
    static int stateflag=2;
-   // QString text = "***";
-    //qDebug() << "trafficlits";
-    //if ((time.second() % 2) == 0)
-    //    text[2] = ' ';
-    //display(text);
-   //display("11:22:33:88");
+
     counter=counter+1;
 
     qDebug() << "steptime" << steptime;
@@ -71,7 +73,8 @@ void TrafficLights::showTime()
         LightsButton->setText("     READY     ");
         stateflag=0;
     }
-
-
 }
-
+void TrafficLights::setMainWindow(MainWindow *mainWindowPtr)
+{
+    this->mainWindowPtr = mainWindowPtr;
+}

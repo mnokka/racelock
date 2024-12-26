@@ -26,15 +26,18 @@ int main(int argc, char *argv[])
 
     RaceClock clock;
     CounterClock CounterClock;
-    TrafficLights TrafficLights;
+    TrafficLights TrafficLightsObject;
 
+    TrafficLights *trafficLightsPtr = &TrafficLightsObject;
+    trafficLightsPtr->setMainWindow(&window);
+    //qDebug() << "main address save:" << trafficLightsPtr;
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(&clock);
     layout->addWidget(&CounterClock);
 
     QHBoxLayout *layout2 = new QHBoxLayout();
-    layout2->addWidget(&TrafficLights);
+    layout2->addWidget(&TrafficLightsObject);
 
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
@@ -48,6 +51,8 @@ int main(int argc, char *argv[])
     window.setWindowTitle(title);
     window.show();
     window.SetLog();
+    window.createActions();
+    window.createMenus();
 
     clock.show();
 

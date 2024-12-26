@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "trafficlights.h"
 #include <QMainWindow>
 #include <QFile>
 #include <QTextStream>
@@ -13,7 +14,9 @@
 #include <QInputDialog>
 #include <QString>
 #include <QFileDialog>
+//#include "editwindow.h"
 
+class EditWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -22,12 +25,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    //int steptime=30;
-    //int GetStepTime(void);
     void SetLog(void);
     void createActions(void);
     void createMenus(void);
     void setBibNumber(const QString &newBibNumber);
+    void RedoTitle(const QString &newBibNumber);
+    void setEditWindow(EditWindow *ptr); // Setter
+    EditWindow* getEditWindow() const;  // Getter
+    MainWindow* GetMainWindow() const;
+
 private:
     QFile *fileptr;
     QString filename;
@@ -53,7 +59,11 @@ private:
     int ClockStepTime=steptime;
     QString BibNumber="none";
 
-    QMainWindow *memeptr=nullptr;
+    MainWindow *memeptr=nullptr;
+
+    EditWindow *editWindowPtr = nullptr;
+
+    TrafficLights *trafficLightsPtr = nullptr;
 
 private slots:
     void about();
@@ -61,7 +71,7 @@ private slots:
     void bib();
     void log();
     void logger(QString message);
-    void RedoTitle(QString);
+
 
 signals:
     void GotLogMessage(QString);

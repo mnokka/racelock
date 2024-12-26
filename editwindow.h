@@ -5,27 +5,22 @@
 #include <QWidget>
 #include "mainwindow.h"
 
-QT_BEGIN_NAMESPACE
-class QComboBox;
-class QLineEdit;
-QT_END_NAMESPACE
 
 class EditWindow : public QWidget
 {
-    Q_OBJECT  // slotteja varten, kts kanuunapeliĆ¤
+    Q_OBJECT  // slotteja varten
 
 public:
 
     EditWindow(QWidget *parent = 0);
     void SetParentWindow(MainWindow *ptr);
+    EditWindow *EditLinePtr;
 
 signals:
     void GotBibNumber(QString);
 
 public slots:
     void returnPressing(void);
-
-protected:
 
 private:
     QLineEdit *echoLineEdit;
