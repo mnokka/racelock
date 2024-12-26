@@ -18,8 +18,6 @@ CounterClock::CounterClock(QWidget *parent)
 
     showTime();
 
-//    setWindowTitle(tr("Digital Clock"));
-//    resize(250, 150);
 }
 
 

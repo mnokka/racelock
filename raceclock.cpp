@@ -17,11 +17,7 @@ RaceClock::RaceClock(QWidget *parent)
 
     showTime();
 
-//    setWindowTitle(tr("Digital Clock"));
-//    resize(250, 150);
 }
-
-
 
 
 
@@ -30,15 +26,7 @@ RaceClock::RaceClock(QWidget *parent)
 void RaceClock::showTime()
 {
     QTime time = QTime::currentTime();
-   // qDebug() << "time:" << time;
     QString text = time.toString("hh:mm:ss");
-    //qDebug() << "counter:" << counter;
-    //if ((time.second() % 2) == 0)
-    //    text[2] = ' ';
     display(text);
-   //display("11:22:33:88");
-    //counter=counter+1;
-    //if (counter>=31) {
-     //   counter=0;
-    //}
+
 }

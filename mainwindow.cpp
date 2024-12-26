@@ -140,14 +140,6 @@ void MainWindow::bib() {
 
 void MainWindow::log() {
 
-    /*bool ok;
-     QString text = QInputDialog::getText(this, tr("Logging"),
-                                          tr("Give log file name:"), QLineEdit::Normal,
-                                          "", &ok);
-     if (ok && !text.isEmpty()) {
-         qDebug() << "text:" << text;
-     }
-*/
 
     QString NewfileName = QFileDialog::getSaveFileName(this, "",
                                                        "","");
