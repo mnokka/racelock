@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
 
     TrafficLights *trafficLightsPtr = &TrafficLightsObject;
     trafficLightsPtr->setMainWindow(&window);
-    //qDebug() << "main address save:" << trafficLightsPtr;
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(&clock);
@@ -55,8 +54,6 @@ int main(int argc, char *argv[])
     window.createMenus();
 
     clock.show();
-
-
 
     return a.exec();
 }

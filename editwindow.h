@@ -17,7 +17,7 @@ public:
     EditWindow *EditLinePtr;
 
 signals:
-    void GotBibNumber(QString);
+    void BibChanged(QString);
 
 public slots:
     void returnPressing(void);

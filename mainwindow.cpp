@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    QString message;
+    message="Program closing";
+    emit BibChanged(message);
     fileptr->close();
     delete fileptr;
 
@@ -23,7 +26,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::SetLog(void) {
-
 
     QTime time = QTime::currentTime();
     QString timetext = time.toString("hh-mm-ss");
@@ -178,7 +180,9 @@ void MainWindow::RedoTitle(const QString &newBibNumber)
     QString title;
     QTextStream(&title) << "Next BIB: " << BibNumber;
     setWindowTitle(title);
-    qDebug() << "Window title updated to:" << title;
+    //qDebug() << "Window title updated to:" << title;
+    //QString message = "Updated BibNumber to: " + BibNumber;
+    //emit GotLogMessage(message);
 }
 
 
@@ -193,11 +197,13 @@ void MainWindow::logger(QString message) {
     if (fileptr->open(QIODevice::ReadWrite| QIODevice::Append )) {
 
         QTextStream mystream(fileptr);
-        // qDebug() << "logger fileptr:" << fileptr;
-        // qDebug() << "logger *fileptr:" << *fileptr;
+        qDebug() << "logger fileptr:" << fileptr;
+        qDebug() << "logger *fileptr:" << *fileptr;
         qDebug() << "logger got:" << message;
 
-        mystream <<timetext<< " --> "<< message << endl;
+        mystream <<timetext<< " --> "<< message << Qt::endl;
+
+
     }
 }
 

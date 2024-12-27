@@ -31,12 +31,15 @@ void EditWindow::returnPressing()
     qDebug() << "Enterpressed:";
 
     QString bibline;
+    QString message;
     bibline=echoLineEdit->text();
     qDebug() << "bibline:" << bibline;
 
     if (parentptr) {
         parentptr->setBibNumber(bibline);
-        emit GotBibNumber(bibline);
+        message="Bib number changed to:"+bibline;
+        qDebug() << "Going to emit:" <<message;
+        emit BibChanged(message);
     } else {
         qDebug() << "ERROR: Parent pointer not set!";
     }
@@ -53,7 +56,12 @@ void EditWindow::SetParentWindow(MainWindow *ptr) {
     qDebug() << "read parentptr back:" << parentptr;
 
     if (parentptr) {
-        connect(this, &EditWindow::GotBibNumber, parentptr, &MainWindow::RedoTitle);
+        //connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::RedoTitle);
+        connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::logger);
+        qDebug() << "GotBibNumber connected to RedoTitle";
+    } else {
+        qDebug() << "ERROR: parentptr is null in SetParentWindow!";
     }
+
 }
 

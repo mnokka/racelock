@@ -34,6 +34,8 @@ public:
     EditWindow* getEditWindow() const;  // Getter
     MainWindow* GetMainWindow() const;
 
+
+
 private:
     QFile *fileptr;
     QString filename;
@@ -65,12 +67,18 @@ private:
 
     TrafficLights *trafficLightsPtr = nullptr;
 
+
+
 private slots:
     void about();
     void settings();
     void bib();
     void log();
-    void logger(QString message);
+    //void logger(QString message);
+
+public slots:
+
+         void logger(QString message);
 
 
 signals:
