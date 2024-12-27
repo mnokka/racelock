@@ -228,3 +228,8 @@ MainWindow* MainWindow::GetMainWindow() const
     return memeptr;
 }
 
+QString MainWindow::GetBib() const
+{
+    return BibNumber;
+}
+

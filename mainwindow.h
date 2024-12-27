@@ -33,7 +33,7 @@ public:
     void setEditWindow(EditWindow *ptr); // Setter
     EditWindow* getEditWindow() const;  // Getter
     MainWindow* GetMainWindow() const;
-
+    QString GetBib() const;
 
 
 private:

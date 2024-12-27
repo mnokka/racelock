@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     TrafficLights *trafficLightsPtr = &TrafficLightsObject;
     trafficLightsPtr->setMainWindow(&window);
 
+
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(&clock);
     layout->addWidget(&CounterClock);

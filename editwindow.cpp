@@ -37,7 +37,7 @@ void EditWindow::returnPressing()
 
     if (parentptr) {
         parentptr->setBibNumber(bibline);
-        message="Bib number changed to:"+bibline;
+        message=bibline;
         qDebug() << "Going to emit:" <<message;
         emit BibChanged(message);
     } else {
@@ -56,8 +56,8 @@ void EditWindow::SetParentWindow(MainWindow *ptr) {
     qDebug() << "read parentptr back:" << parentptr;
 
     if (parentptr) {
-        //connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::RedoTitle);
-        connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::logger);
+        connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::RedoTitle);
+        //connect(this, &EditWindow::BibChanged, parentptr, &MainWindow::logger);
         qDebug() << "GotBibNumber connected to RedoTitle";
     } else {
         qDebug() << "ERROR: parentptr is null in SetParentWindow!";

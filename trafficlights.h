@@ -26,10 +26,16 @@ private slots:
 
 private:
    MainWindow *mainWindowPtr = nullptr;
+    int stateflag=2;
+    double coeff=0.7;
+    QString CalcFont(void);
 
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+
+signals:
+    void TrafficLightChanged(QString);
 
 };
 #endif // TRAFFICLIGHTS_H
